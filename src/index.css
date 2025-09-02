@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ChatGPT-inspired Design System - Dark Theme */
+
+@layer base {
+  :root {
+    /* Light theme - keeping original as fallback */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.75rem;
+    
+    /* ChatGPT Dark Theme Colors */
+    --chat-background: 220 13% 9%;
+    --chat-surface: 220 13% 11%;
+    --chat-surface-hover: 220 13% 13%;
+    --chat-sidebar: 220 13% 8%;
+    --chat-sidebar-hover: 220 13% 10%;
+    --chat-border: 220 13% 15%;
+    --chat-text-primary: 220 13% 91%;
+    --chat-text-secondary: 220 13% 65%;
+    --chat-text-muted: 220 13% 45%;
+    --chat-accent: 142 71% 45%;
+    --chat-accent-hover: 142 71% 40%;
+    --chat-user-message: 142 71% 45%;
+    --chat-ai-message: 220 13% 11%;
+    --chat-input: 220 13% 13%;
+    --chat-input-border: 220 13% 20%;
+    
+    /* Gradients */
+    --gradient-user: linear-gradient(135deg, hsl(142 71% 45%), hsl(142 71% 50%));
+    --gradient-ai: linear-gradient(135deg, hsl(220 13% 11%), hsl(220 13% 13%));
+    --gradient-accent: linear-gradient(135deg, hsl(142 71% 45%), hsl(142 71% 50%));
+    
+    /* Shadows */
+    --shadow-subtle: 0 1px 3px 0 hsl(220 13% 5% / 0.1), 0 1px 2px 0 hsl(220 13% 5% / 0.06);
+    --shadow-medium: 0 4px 6px -1px hsl(220 13% 5% / 0.1), 0 2px 4px -1px hsl(220 13% 5% / 0.06);
+    --shadow-large: 0 10px 15px -3px hsl(220 13% 5% / 0.1), 0 4px 6px -2px hsl(220 13% 5% / 0.05);
+    
+    /* Animation */
+    --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  /* Default to dark theme for ChatGPT experience */
+  :root {
+    --background: var(--chat-background);
+    --foreground: var(--chat-text-primary);
+    --card: var(--chat-surface);
+    --card-foreground: var(--chat-text-primary);
+    --popover: var(--chat-surface);
+    --popover-foreground: var(--chat-text-primary);
+    --primary: var(--chat-accent);
+    --primary-foreground: 220 13% 9%;
+    --secondary: var(--chat-surface-hover);
+    --secondary-foreground: var(--chat-text-primary);
+    --muted: var(--chat-surface);
+    --muted-foreground: var(--chat-text-muted);
+    --accent: var(--chat-accent);
+    --accent-foreground: 220 13% 9%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: var(--chat-border);
+    --input: var(--chat-input);
+    --ring: var(--chat-accent);
+    
+    /* Sidebar tokens */
+    --sidebar-background: var(--chat-sidebar);
+    --sidebar-foreground: var(--chat-text-primary);
+    --sidebar-primary: var(--chat-accent);
+    --sidebar-primary-foreground: 220 13% 9%;
+    --sidebar-accent: var(--chat-sidebar-hover);
+    --sidebar-accent-foreground: var(--chat-text-primary);
+    --sidebar-border: var(--chat-border);
+    --sidebar-ring: var(--chat-accent);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
