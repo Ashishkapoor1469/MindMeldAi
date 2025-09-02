@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useCallback } from "react"
 import type { Message, Conversation, ChatState } from "@/types/chat"
 
