@@ -11,10 +11,10 @@ export function useChat() {
     isTyping: false,
   })
 
-  // ✅ safer random ID generator
+  // ✅ Safer random ID generator
   const generateId = () => Math.random().toString(36).substring(2, 11)
 
-  // ✅ create new conversation
+  // ✅ Create new conversation
   const createNewConversation = useCallback((firstMessage?: string): Conversation => {
     const conversation: Conversation = {
       id: generateId(),
@@ -35,7 +35,7 @@ export function useChat() {
     return conversation
   }, [])
 
-  // ✅ send message function
+  // ✅ Send message function
   const sendMessage = useCallback(
     async (content: string) => {
       setState((prev) => {
@@ -79,14 +79,18 @@ export function useChat() {
       })
 
       try {
-        // ✅ use env variable instead of hardcoded localhost
-        const API_URL =  "https://mindmidbackend.vercel.app"
+        // ✅ use env variable instead of hardcoding
+        const API_URL = "https://mindmidbackend.vercel.app"
 
         const res = await fetch(`${API_URL}/api/chat`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ content }),
         })
+
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`)
+        }
 
         const data = await res.json()
         if (data.error) throw new Error(data.error)
@@ -131,7 +135,7 @@ export function useChat() {
     [createNewConversation]
   )
 
-  // ✅ get active conversation
+  // ✅ Get active conversation
   const getCurrentConversation = useCallback(() => {
     return state.conversations?.find((c) => c.id === state.currentConversationId) || null
   }, [state])
