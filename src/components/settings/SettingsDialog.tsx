@@ -23,7 +23,7 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-4xl h-[80vh] bg-chat-surface border-chat-border">
+      <DialogContent className="max-w-6xl h-[80vh] bg-chat-surface border-chat-border">
         <DialogHeader className="flex flex-row items-center justify-between p-6 border-b border-chat-border">
           <DialogTitle className="text-xl font-semibold text-chat-text-primary">Settings</DialogTitle>
           <Button
@@ -37,24 +37,24 @@ export function SettingsDialog({ open, onOpenChange }: SettingsDialogProps) {
         </DialogHeader>
 
         <div className="flex flex-1 overflow-hidden">
-          <Tabs value={activeTab} onValueChange={setActiveTab} orientation="vertical" className="flex w-full">
-            <TabsList className="w-48 h-full bg-chat-sidebar border-r border-chat-border p-2 flex-col justify-start">
-              <TabsTrigger value="general" className="w-full justify-start text-left">
+          <Tabs value={activeTab} onValueChange={setActiveTab} orientation="vertical" className="flex flex-col md:flex-row w-full h-full">
+            <TabsList className="md:w-48 md:h-full h-10 bg-chat-sidebar border-r border-chat-border p-2 md:flex-col flex-row justify-start">
+              <TabsTrigger value="general" className="w-full min-[600px]:text-xl text-[9px] justify-start text-left">
                 General
               </TabsTrigger>
-              <TabsTrigger value="models" className="w-full justify-start text-left">
+              <TabsTrigger value="models" className="w-full min-[600px]:text-xl text-[9px] justify-start text-left">
                 Models & AI
               </TabsTrigger>
-              <TabsTrigger value="appearance" className="w-full justify-start text-left">
+              <TabsTrigger value="appearance" className="w-full min-[600px]:text-xl text-[9px] justify-start text-left">
                 Appearance
               </TabsTrigger>
-              <TabsTrigger value="advanced" className="w-full justify-start text-left">
+              <TabsTrigger value="advanced" className="w-full min-[600px]:text-xl text-[9px] justify-start text-left">
                 Advanced
               </TabsTrigger>
-              <TabsTrigger value="account" className="w-full justify-start text-left">
+              <TabsTrigger value="account" className="w-full min-[600px]:text-xl text-[9px] justify-start text-left">
                 Account
               </TabsTrigger>
-              <TabsTrigger value="data" className="w-full justify-start text-left">
+              <TabsTrigger value="data" className="w-full min-[600px]:text-xl text-[9px] justify-start text-left">
                 Data & Privacy
               </TabsTrigger>
             </TabsList>

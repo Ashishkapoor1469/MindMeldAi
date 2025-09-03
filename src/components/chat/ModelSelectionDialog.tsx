@@ -130,164 +130,171 @@ export function ModelSelectionDialog() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant="outline" className="border-chat-border hover:bg-chat-surface-hover">
-          <Brain className="h-4 w-4 mr-2" />
-          Switch Model
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="max-w-4xl h-[80vh] bg-chat-surface border-chat-border">
-        <DialogHeader className="border-b border-chat-border pb-4">
-          <DialogTitle className="text-xl text-chat-text-primary">Choose AI Model</DialogTitle>
-        </DialogHeader>
+  <DialogTrigger asChild>
+    <Button variant="outline" className="border-chat-border hover:bg-chat-surface-hover">
+      <Brain className="h-4 w-4 mr-2" />
+      Switch Model
+    </Button>
+  </DialogTrigger>
+  <DialogContent className="max-w-6xl h-screen bg-chat-surface border-chat-border">
+    <DialogHeader className="border-b border-chat-border pb-3 sm:pb-4">
+      <DialogTitle className="text-lg sm:text-xl text-chat-text-primary">Choose AI Model</DialogTitle>
+    </DialogHeader>
 
-        <Tabs defaultValue="models" className="flex-1 flex flex-col">
-          <TabsList className="w-full bg-chat-sidebar border-b border-chat-border">
-            <TabsTrigger value="models" className="flex-1">AI Models</TabsTrigger>
-            <TabsTrigger value="comparison" className="flex-1">Comparison</TabsTrigger>
-            <TabsTrigger value="pricing" className="flex-1">Pricing</TabsTrigger>
-          </TabsList>
+    <Tabs defaultValue="models" className="flex-1 flex flex-col">
+      {/* Tabs List - Responsive */}
+      <TabsList className="w-full h-full bg-chat-sidebar border-b border-chat-border flex flex-col sm:flex-row">
+        <TabsTrigger value="models" className="flex-1">AI Models</TabsTrigger>
+        <TabsTrigger value="comparison" className="flex-1">Comparison</TabsTrigger>
+        <TabsTrigger value="pricing" className="flex-1">Pricing</TabsTrigger>
+      </TabsList>
 
-          <TabsContent value="models" className="flex-1 mt-0">
-            <ScrollArea className="h-full">
-              <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-                {models.map((model) => (
-                  <ModelCard
-                    key={model.id}
-                    {...model}
-                    onClick={() => setSelectedModel(model.id)}
-                    isSelected={selectedModel === model.id}
-                  />
+      {/* Models Tab */}
+     <TabsContent value="models" className="flex-1 mt-0">
+  <ScrollArea className="h-full">
+    <div className="p-4 sm:p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+      {models.map((model) => (
+        <ModelCard
+          key={model.id}
+          {...model}
+          onClick={() => setSelectedModel(model.id)}
+          isSelected={selectedModel === model.id}
+        />
+      ))}
+    </div>
+  </ScrollArea>
+</TabsContent>
+
+
+      {/* Comparison Table */}
+      <TabsContent value="comparison" className="flex-1 mt-0">
+        <ScrollArea className="h-full">
+          <div className="md:p-4 overflow-x-auto">
+            <table className="md:min-w-[600px] w-full border-collapse text-[9px] md:text-sm sm:text-base">
+              <thead>
+                <tr className="border-b border-chat-border">
+                  <th className="text-left p-2 sm:p-3 text-chat-text-primary">Feature</th>
+                  <th className="text-center p-2 sm:p-3 text-chat-text-primary">GPT-4 Turbo</th>
+                  <th className="text-center p-2 sm:p-3 text-chat-text-primary">Claude 3 Opus</th>
+                  <th className="text-center p-2 sm:p-3 text-chat-text-primary">Gemini Pro</th>
+                  <th className="text-center p-2 sm:p-3 text-chat-text-primary">GPT-3.5 Turbo</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ['Context Length', '128K', '200K', '32K', '16K'],
+                  ['Reasoning', '★★★★★', '★★★★★', '★★★★☆', '★★★☆☆'],
+                  ['Code Generation', '★★★★★', '★★★★☆', '★★★★☆', '★★★☆☆'],
+                  ['Creative Writing', '★★★★☆', '★★★★★', '★★★★☆', '★★★☆☆'],
+                  ['Speed', '★★★☆☆', '★★★☆☆', '★★★★☆', '★★★★★'],
+                  ['Cost', '$$$$', '$$$$$', '$$$', '$$'],
+                ].map(([feature, ...values], index) => (
+                  <tr key={index} className="border-b border-chat-border/50">
+                    <td className="p-2 sm:p-3 font-medium text-chat-text-primary">{feature}</td>
+                    {values.map((value, i) => (
+                      <td key={i} className="p-2 sm:p-3 text-center text-chat-text-secondary">{value}</td>
+                    ))}
+                  </tr>
                 ))}
-              </div>
-            </ScrollArea>
-          </TabsContent>
+              </tbody>
+            </table>
+          </div>
+        </ScrollArea>
+      </TabsContent>
 
-          <TabsContent value="comparison" className="flex-1 mt-0">
-            <ScrollArea className="h-full">
-              <div className="p-6">
-                <div className="overflow-x-auto">
-                  <table className="w-full border-collapse">
-                    <thead>
-                      <tr className="border-b border-chat-border">
-                        <th className="text-left p-3 text-chat-text-primary">Feature</th>
-                        <th className="text-center p-3 text-chat-text-primary">GPT-4 Turbo</th>
-                        <th className="text-center p-3 text-chat-text-primary">Claude 3 Opus</th>
-                        <th className="text-center p-3 text-chat-text-primary">Gemini Pro</th>
-                        <th className="text-center p-3 text-chat-text-primary">GPT-3.5 Turbo</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {[
-                        ['Context Length', '128K', '200K', '32K', '16K'],
-                        ['Reasoning', '★★★★★', '★★★★★', '★★★★☆', '★★★☆☆'],
-                        ['Code Generation', '★★★★★', '★★★★☆', '★★★★☆', '★★★☆☆'],
-                        ['Creative Writing', '★★★★☆', '★★★★★', '★★★★☆', '★★★☆☆'],
-                        ['Speed', '★★★☆☆', '★★★☆☆', '★★★★☆', '★★★★★'],
-                        ['Cost', '$$$$', '$$$$$', '$$$', '$$'],
-                      ].map(([feature, ...values], index) => (
-                        <tr key={index} className="border-b border-chat-border/50">
-                          <td className="p-3 font-medium text-chat-text-primary">{feature}</td>
-                          {values.map((value, i) => (
-                            <td key={i} className="p-3 text-center text-chat-text-secondary">{value}</td>
-                          ))}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </ScrollArea>
-          </TabsContent>
-
-          <TabsContent value="pricing" className="flex-1 mt-0">
-            <ScrollArea className="h-full">
-              <div className="p-6 space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {models.map((model) => (
-                    <Card key={model.id} className="bg-chat-ai-message border-chat-border">
-                      <CardHeader className="pb-3">
-                        <CardTitle className="text-base text-chat-text-primary">{model.name}</CardTitle>
-                        <p className="text-sm text-chat-text-muted">{model.provider}</p>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="space-y-2 text-sm">
-                          <div className="flex justify-between">
-                            <span className="text-chat-text-secondary">Input</span>
-                            <span className="text-chat-text-primary">$0.01/1K</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-chat-text-secondary">Output</span>
-                            <span className="text-chat-text-primary">$0.03/1K</span>
-                          </div>
-                          <Separator className="bg-chat-border" />
-                          <div className="flex justify-between font-medium">
-                            <span className="text-chat-text-secondary">Est. per message</span>
-                            <span className="text-chat-text-primary">$0.005</span>
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-                
-                <Card className="bg-chat-ai-message border-chat-border">
-                  <CardHeader>
-                    <CardTitle className="text-chat-text-primary">Usage Calculator</CardTitle>
+      {/* Pricing */}
+      <TabsContent value="pricing" className="flex-1 mt-0">
+        <ScrollArea className="h-full">
+          <div className="p-4 sm:p-6 space-y-4">
+            {/* Pricing Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {models.map((model) => (
+                <Card key={model.id} className="bg-chat-ai-message border-chat-border">
+                  <CardHeader className="pb-2 sm:pb-3">
+                    <CardTitle className="text-base text-chat-text-primary">{model.name}</CardTitle>
+                    <p className="text-xs sm:text-sm text-chat-text-muted">{model.provider}</p>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <Label className="text-chat-text-primary">Messages per day</Label>
-                        <Input 
-                          type="number" 
-                          defaultValue="50" 
-                          className="bg-chat-input border-chat-input-border"
-                        />
+                  <CardContent>
+                    <div className="space-y-2 text-xs sm:text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-chat-text-secondary">Input</span>
+                        <span className="text-chat-text-primary">$0.01/1K</span>
                       </div>
-                      <div>
-                        <Label className="text-chat-text-primary">Selected model</Label>
-                        <Select defaultValue="gpt-4-turbo">
-                          <SelectTrigger className="bg-chat-input border-chat-input-border">
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent className="bg-chat-surface border-chat-border">
-                            {models.map((model) => (
-                              <SelectItem key={model.id} value={model.id}>
-                                {model.name}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
+                      <div className="flex justify-between">
+                        <span className="text-chat-text-secondary">Output</span>
+                        <span className="text-chat-text-primary">$0.03/1K</span>
                       </div>
-                    </div>
-                    <div className="p-3 bg-chat-surface border border-chat-border rounded-lg">
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-chat-text-primary">$7.50</div>
-                        <div className="text-sm text-chat-text-muted">Estimated monthly cost</div>
+                      <Separator className="bg-chat-border" />
+                      <div className="flex justify-between font-medium">
+                        <span className="text-chat-text-secondary">Est. per message</span>
+                        <span className="text-chat-text-primary">$0.005</span>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
-              </div>
-            </ScrollArea>
-          </TabsContent>
-        </Tabs>
+              ))}
+            </div>
 
-        <div className="flex justify-between items-center pt-4 border-t border-chat-border">
-          <div className="text-sm text-chat-text-muted">
-            Currently using: <span className="text-chat-text-primary font-medium">GPT-4 Turbo</span>
+            {/* Usage Calculator */}
+            <Card className="bg-chat-ai-message border-chat-border">
+              <CardHeader>
+                <CardTitle className="text-base sm:text-lg text-chat-text-primary">Usage Calculator</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <Label className="text-chat-text-primary text-sm sm:text-base">Messages per day</Label>
+                    <Input 
+                      type="number" 
+                      defaultValue="50" 
+                      className="bg-chat-input border-chat-input-border"
+                    />
+                  </div>
+                  <div>
+                    <Label className="text-chat-text-primary text-sm sm:text-base">Selected model</Label>
+                    <Select defaultValue="gpt-4-turbo">
+                      <SelectTrigger className="bg-chat-input border-chat-input-border">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent className="bg-chat-surface border-chat-border">
+                        {models.map((model) => (
+                          <SelectItem key={model.id} value={model.id}>
+                            {model.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+                <div className="p-3 bg-chat-surface border border-chat-border rounded-lg">
+                  <div className="text-center">
+                    <div className="text-xl sm:text-2xl font-bold text-chat-text-primary">$7.50</div>
+                    <div className="text-xs sm:text-sm text-chat-text-muted">Estimated monthly cost</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
-          <div className="flex gap-2">
-            <Button variant="outline" onClick={() => setOpen(false)} className="border-chat-border">
-              Cancel
-            </Button>
-            <Button onClick={() => setOpen(false)} className="bg-chat-accent hover:bg-chat-accent-hover">
-              Switch Model
-            </Button>
-          </div>
-        </div>
-      </DialogContent>
-    </Dialog>
+        </ScrollArea>
+      </TabsContent>
+    </Tabs>
+
+    {/* Footer */}
+    <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-0 pt-3 sm:pt-4 border-t border-chat-border">
+      <div className="text-xs sm:text-sm text-chat-text-muted">
+        Currently using: <span className="text-chat-text-primary font-medium">GPT-4 Turbo</span>
+      </div>
+      <div className="flex gap-2 w-full sm:w-auto">
+        <Button variant="outline" onClick={() => setOpen(false)} className="w-full sm:w-auto border-chat-border">
+          Cancel
+        </Button>
+        <Button onClick={() => setOpen(false)} className="w-full sm:w-auto bg-chat-accent hover:bg-chat-accent-hover">
+          Switch Model
+        </Button>
+      </div>
+    </div>
+  </DialogContent>
+</Dialog>
+
   );
 }

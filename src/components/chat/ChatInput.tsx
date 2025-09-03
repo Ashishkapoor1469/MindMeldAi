@@ -58,7 +58,7 @@ export function ChatInput({
             type="button"
             variant="ghost"
             size="icon"
-            className="flex-shrink-0 h-8 w-8 hover:bg-chat-surface-hover text-chat-text-muted hover:text-chat-text-primary"
+            className="flex-shrink-0 h-8 w-8 hover:bg-chat-surface-hover text-chat-text-muted hover:text-chat-text-primary "
           >
             <Paperclip className="h-4 w-4" />
           </Button>
