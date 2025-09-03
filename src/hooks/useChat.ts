@@ -78,7 +78,7 @@ export function useChat() {
 
       try {
         // ✅ use env variable instead of hardcoding
-        const API_URL = process.env.URI||"http://localhost:5000"
+        const API_URL = "https://mindmidbackend.vercel.app"
 
         const res = await fetch(`${API_URL}/api/chat`, {
           method: "POST",
